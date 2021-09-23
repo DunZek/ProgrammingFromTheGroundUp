@@ -1,5 +1,5 @@
 # Chapter 1. Introduction
-
+ 
 ## Welcome to Programming
 - Donald Knuth describes programming not as a telling a computer how to do something, but telling a erson how they would instruct a computer to do something.
 - A programmer is a problem-solver, a poet, and an instructor all at once.
