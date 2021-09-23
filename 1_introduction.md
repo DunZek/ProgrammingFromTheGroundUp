@@ -16,3 +16,20 @@
 - Learning the issues involved in programming, learning how to research answers, and elarning how to look ahead are all major parts of a programmer's work.
 
 ## Your Tools
+- This book teaches assembly language for x86 processors and the GNU/Linux operating system.
+- Use GCC
+- All you need to know otherwise is how to navigate the command line and how to use text-editors such as vim and emacs.
+- Programs will not work with non-Linux operating systems such as BSD, etc. However, all of the *skills* learned in this book should be easile transferable to any other system.
+
+### So what is GNU/Linux?
+- The GCC tool set contains all of the programs necessary to create programs in various computer languages.
+- Linux = *kernel*
+	- The core, both a fence and a gate.
+	- As a Gate:
+		- allows programs to access hardware in a uniform way
+		- handles device-specific interactions, file accesses, interactions between processes, etc.
+	- As a Fence:
+		- prevents programs from accidentalyl overwriting each other's data
+		- prevents unwanted file and device access (permission handling)
+- **Example 1-1. How the computer processes keyboard signals**
+	- `Keyboard -> Kernel -> Windowing system -> Application program`
