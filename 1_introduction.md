@@ -33,3 +33,18 @@
 		- prevents unwanted file and device access (permission handling)
 - **Example 1-1. How the computer processes keyboard signals**
 	- `Keyboard -> Kernel -> Windowing system -> Application program`
+
+### This book will be using the computer's low-level assembly language
+- There are essentially three kinds of languages:
+	- Machine Language:
+		- This is what the computer actually sees and deals with.
+		- So, every command is a given number or sequences of numbers.
+	- Assembly Language:
+		- Same as machine language with exception to the replacement of command numbers using easier letter sequences.
+		- Other small things are done to make it easier as well.
+	- High-Level Language:
+		- Make programming easier by easing code comprehension and expression
+		- While Assembly language requires you to work with the machine itself, High-level languages allow you to describe the program in a more natural language.
+		- A single command in a High-level language is usually equivalent to several commands in an Assembly language.
+- In this book we will learn Assembly language, although we will cover a bit of high-level languages.
+- Hopefully by learning assembly language, your understanding of how programming and computers work will put you a step ahead.
