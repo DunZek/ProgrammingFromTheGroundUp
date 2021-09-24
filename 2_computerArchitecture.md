@@ -79,10 +79,17 @@ into the register.
 		- For example, we could specify address 2002 and an index register. If the index register contains the number 4, the actual address the data is loaded from would be 2006. 
 		- This way, if you have a set of numbers starting at location 2002, you can cycle between each of them using an index register.
 		- On x86 processors, you can also specify a *multiplier* for the index.
+		- Take the time to calculate these yourself to make sure you understand how it works.
+	- In the *indirect addressing mode*, the instruction contains a regster that contains a pointer to where the data should be accessed.
+		- In direct addresing, we would just load the value directly specified with the register, but in indirect addressing, we use pointer values as the address to use to load the specified data we want in the memory to the register.
+	- Finally, there is the *base pointer addressing mode*. This is similar to indirect addressing, but you also include a number called the *offset* to add to the register's value before using it for look up.
+- There are other forms of addressing, but these are the most important ones.
 
 ## Review
 
 ### Know the Concepts
+- "Describe the fetch-execute cycle."
+	- 
 
 ### Use the Concepts
 
