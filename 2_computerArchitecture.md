@@ -124,7 +124,7 @@ into the register.
 	- You would be trying to access 5 * 4 + 6512 = memory-location 6532.
 - In indexed addressing mode, if the base address is 123472, the index register has a 0, and the multiplier is 4, what address would you be trying to access?
 	- You would be trying to access 0 * 4 + 123472 = memory-location 123472, the same memory location as the given base address.
--In indexed addressing mode, if the base address is 9123478, the index register has a 20, and the multiplier is 1, what address would you be trying to access?
+- In indexed addressing mode, if the base address is 9123478, the index register has a 20, and the multiplier is 1, what address would you be trying to access?
 	- You would be trying to access 20 * 1 + 9123478 = memory-location 9123487. 
 
 ### Going Further
