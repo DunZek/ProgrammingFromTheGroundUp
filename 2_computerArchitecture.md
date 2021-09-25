@@ -115,7 +115,20 @@ into the register.
 ### Use the Concepts
 - What data would you use in an employee record? How would you lay it out in memory?
 	- As a computer, I would use numerical data to represent everything, only using programs to interpret some parts as strings of characters, such as the names of employees, and others as floating-point values, such as their weight.
-	- As a computer, I will use fixed-sized 
-
+	- As a computer, I will use fixed-sized data so that I can link one piece of data to the next with ease.
+- If I had the pointer to the beginning of the employee record above, and wanted to access a particular piece of data inside it, what addressing mode would I use?
+	- You would have to use an addressing mode that deals with addresses/pointers. Particularly, since you want to access the direct content of the given pointer's memory location, you will have to use th direct addressing mode which fulfills just that: loading a register with the data at a particular address specified, copying the memory-contents from the memory-location into the register.
+- In base pointer addressing mode, if you have a register holding the value 3122, and an offset of 20, what address would you be trying to access?
+	- You would be accessing memory-location 3142, but then sebsequently be trying to access the memory-location specified by the pointer retrieved from that memory-location.
+- In indexed addressind mode, if the base address is 6512, the index rehister has a 5, and the multiplier is 4, what address would you be trying to adccess?
+	- You would be trying to access 5 * 4 + 6512 = memory-location 6532.
+- In indexed addressing mode, if the base address is 123472, the index register has a 0, and the multiplier is 4, what address would you be trying to access?
+	- You would be trying to access 0 * 4 + 123472 = memory-location 123472, the same memory location as the given base address.
+-In indexed addressing mode, if the base address is 9123478, the index register has a 20, and the multiplier is 1, what address would you be trying to access?
+	- You would be trying to access 20 * 1 + 9123478 = memory-location 9123487. 
 
 ### Going Further
+- What are the minimum number of addressing modes needed for computation?
+- Why include addressing modes that aren't strictly needed?
+- Research and then describe how pipelineing (or one of the other complicating factors) affects the fetch-execute cycle.
+- Research and then describe the tradeoffs between fixed-length instructions and variable-length instructions.
