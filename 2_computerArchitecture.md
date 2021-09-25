@@ -63,8 +63,8 @@
 ## Interpreting Memory
 - Computers are very exact. Because they are exact, programmers have to be equally exact. A computer has no idea what your program is supposed to do. Therefore, it will only do exactly what you tell it to do. 
 - Therefore, as a programmer, you need to know exactly how you have your data arranged in memory.
-- Letters, pictures, music, web pages, documents, and anything else are justlong sequences of numbers in the computer, which particular programs know how to interpret.
-- Variable-length data is usually stored separately from the rest. If the length of data is variable, we will have an very hard time identifying the next location of data. Therefore, the length of almost all data is fixed.
+- Letters, pictures, music, web pages, documents, and anything else are just long sequences of numbers in the computer, which particular programs know how to interpret.
+- Variable-length data is usually stored separately from the rest. If the length of data is variable, we will have a very hard time identifying the next location of data. Therefore, the length of almost all data is fixed.
 
 ## Data Accessing Methods
 - Processors have a number of different ways of accessing data, known as addressing modes:
@@ -88,8 +88,29 @@ into the register.
 ## Review
 
 ### Know the Concepts
-- "Describe the fetch-execute cycle."
-	- 
+- *Describe the fetch-execute cycle.*
+	- This is how the CPU works. The CPU iteratively executes instructions, receives more from memory as its instructions dictate, and keeps executing more.
+- *What is a register? How would computation be more difficult without registers?*
+	- Registers are the Random Access Memories of CPUs. They are tools the CPU uses to keep track of and execute actual instruction. 
+	- Assuming without registers, the CPU will have to access the non-volatile memory over and over again via data buses, for they have become the means to store instructions instead of the registers. This method results in very slow computation.
+- *How do you represent numbers larger than 255?*
+	- We can simply use a combination of bytes to represent larger numbers.
+- *How big are the registers on the machines that we will be using?*
+	- The size of a register is called the word size, and on x86 processors, they are 4 bytes big, and can therefore deal with values roughly 4 billion in size.
+- How does a computer know how to interpret a given byte or set of bytes of memory?
+	- The CPU interprets instructions from memory and executes them using a special-purpose register called an instruction pointer that points numbers to those locations, becoming addresses due to their purpose. That's it. Otherwise, the computer's various specialized hardware such as the monitor and speakers and various software programs interpret these bytes according to their needs.
+- What are the addressing modes and what are they used for?
+	- Addressing modes are the different ways a processor accesses data. There are various addressing modes, but the listed below are the most important ones to consider:
+		- Ways of accessing data within the processor:
+			- Immediate mode, in which the data to access is embedded in the instruction itself. The processor can therefore specify a particular value to a register using this addressing mode.
+			- Register addressing mode, in which the given instruction contains a register to access instead of a memory location.
+		- Ways of accessing data outside the processor (via addresses):
+		- Direct addressing mode, in which the instruction contains the memory address to access. Registers are able to use a given address to retrieve and use the value stored in the particular memory location.
+		- Indexed addressing mode, in which the instruction contains the memory address to access, and also an index register to specify and that offsets that address.
+		- Indirect addressing mode, in which the instruction contains a register that contains a pointer to where the data should be accessed. This means that the given register uses a pointer address to a particular memory location, and then the numerical value itself retrieved from the memory would be used as the actual address to the location we want in memory (thus becoming an address due to purpose).
+		- Base pointer addressing mode, which is the index-addressing mode of indirect-addressing mode.
+- What does the instruction pointer do?
+	- The instruction pointer is a special-purpose register that the computer uses to interpret particular given memory locations contain instruction. he instruction pointer points to those memory locations at one point in time or another. So, if the instruction pointer points to a memory word, its contents are loaded as an instruction. It is the only way a computer can differentiate between programs and other types of data.
 
 ### Use the Concepts
 
