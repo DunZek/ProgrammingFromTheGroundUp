@@ -10,7 +10,7 @@
 - Computer memory is analagous to the PO boxes of the local post office:
 	- a fixed number of PO boxes
 	- each PO box contains value
-- Computer memory is used for a number of different things. Everything what a computer is, is all stored in computer memory. All of the following are comptuer data:
+- Computer memory is used for a number of different things. Everything what a computer is, is all stored in computer memory. All of the following are computer data:
 	- Graphics
 	- Pixel location
 	- Mathematical calculations
@@ -88,14 +88,14 @@ into the register.
 ## Review
 
 ### Know the Concepts
-- *Describe the fetch-execute cycle.*
+- Describe the fetch-execute cycle.
 	- This is how the CPU works. The CPU iteratively executes instructions, receives more from memory as its instructions dictate, and keeps executing more.
-- *What is a register? How would computation be more difficult without registers?*
+- What is a register? How would computation be more difficult without registers?
 	- Registers are the Random Access Memories of CPUs. They are tools the CPU uses to keep track of and execute actual instruction. 
 	- Assuming without registers, the CPU will have to access the non-volatile memory over and over again via data buses, for they have become the means to store instructions instead of the registers. This method results in very slow computation.
-- *How do you represent numbers larger than 255?*
+- How do you represent numbers larger than 255?
 	- We can simply use a combination of bytes to represent larger numbers.
-- *How big are the registers on the machines that we will be using?*
+- How big are the registers on the machines that we will be using?
 	- The size of a register is called the word size, and on x86 processors, they are 4 bytes big, and can therefore deal with values roughly 4 billion in size.
 - How does a computer know how to interpret a given byte or set of bytes of memory?
 	- The CPU interprets instructions from memory and executes them using a special-purpose register called an instruction pointer that points numbers to those locations, becoming addresses due to their purpose. That's it. Otherwise, the computer's various specialized hardware such as the monitor and speakers and various software programs interpret these bytes according to their needs.
@@ -113,5 +113,9 @@ into the register.
 	- The instruction pointer is a special-purpose register that the computer uses to interpret particular given memory locations contain instruction. he instruction pointer points to those memory locations at one point in time or another. So, if the instruction pointer points to a memory word, its contents are loaded as an instruction. It is the only way a computer can differentiate between programs and other types of data.
 
 ### Use the Concepts
+- What data would you use in an employee record? How would you lay it out in memory?
+	- As a computer, I would use numerical data to represent everything, only using programs to interpret some parts as strings of characters, such as the names of employees, and others as floating-point values, such as their weight.
+	- As a computer, I will use fixed-sized 
+
 
 ### Going Further
