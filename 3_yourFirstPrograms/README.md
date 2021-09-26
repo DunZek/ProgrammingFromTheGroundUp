@@ -175,7 +175,17 @@ Labels define a symbol's value. They tell the assembler to make the symbol's val
 
 ## Finding a Maximum Value
 - Initialize `maximum.s` with the code prepared in the book.
-- 
+- Now, assemble and link it with these commands:
+	- `as maximum.s -o maximum.o`
+	- `ld maximum.o -o maximum`
+- Now run it, anc check its status
+	- `./maximum`
+	- `echo $?`
+- These lines are the data section:
+	- ```
+	data_items:	# These are the data items
+		.long 3,67,34,222,45,75,54,34,44,33,22,11,66,0
+	```
 
 ## Addressing Modes
 
