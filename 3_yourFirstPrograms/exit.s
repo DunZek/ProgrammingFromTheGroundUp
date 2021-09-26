@@ -31,5 +31,5 @@ _start:
 					# Change this around and it will
 					# return different things to echo $?
 
-	int $0x80		# this wakes up the kernel to run
+	#int $0x80		# this wakes up the kernel to run
 					# the exit command
