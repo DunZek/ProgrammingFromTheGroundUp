@@ -104,5 +104,85 @@ Labels define a symbol's value. They tell the assembler to make the symbol's val
 	- In the case of the `exit` system call, the operating system requires a status code to be loaded in `%ebx`. This value is then returned to the system, and it is the value you retrieved when you typed `echo $?`.
 	- So, we load `%ebx` with `0` by typing the following:
 		- `movl $0, %ebx`
+- Loading registers doesn't do anything by itself. Apart from system calls, registers are places where all program logic such as addition, subtraction, and comparisons take place. 
+	- Linux simply requires that certain registers be loaded with certain parameter values before making a system call.
+	- `%eax` is always required to be loaded with the system call number. 
+	- For other registers however, each system call has different requirements.
+		- In the `exit` system call, `%ebx` is required to be loaded with the exit status.
+	- See Appendix C for a list of common system calls and what is required to be in each register.
+- The next instruction is the "magic" one. It looks like this:
+	- `int $0x80`
+	- `int` stands for *interrupt*.
+	- The `0x80` is the interrupt number to use.
+	- You may be wondering why it's `0x80` instead of just `80`. The reason is that the number is written in hexadecimal. Numbers starting with `0x` are in hexadecimal. Tacking on an `H` at the end is also sometimes used instead. 
+		- For more information about this, see Chapter 10.
+- An *interrupt* interrupts the normal program flow, and transfers control from our program to Linux so that it will do a system call.
+	- Actually, the interrupt transfers control to whoever set up an *interrupt handler* for the interrupt number. In the case of Linux, all of them are set to be handled by the Linux kernel.
+- In this case, all we're doing is asking Linux to terminate the progam, in which case we won't be back in control. If we didn't signal the interrupt, then no system call would have been performed.
 
+### Quick System Call Review: 
+- To recap, the Operating System features are accessed through system calls.
+- These are invoked by setting up the registers in a special way and issuing the instruction `int $0x80`.
+- Linux knows which system call we want to access by what we stored in the `%eax` register. 
+- Each system call has other requirements as to what needs to be stored in the other registers.
+- System call number 1 is the `exit` system call, which requires the status code to be placed in `%ebx`.
 
+## Planning the Program
+- In our next program, we will try to find the biggest number from a list of numbers.
+- Computers are very detail-oriented, so in order to write the program we will have to have planned out a number of details:
+	- Where will the original list of numbers be stored?
+	- What procedure will we need to follow to find the maximum number?
+	- How much storage do we need to carry out that procedure?
+	- Will all of the storage fit into registers, or do we need to use some memory as well?
+- A computer needs a plan of every step of the way. So, let's do a little planning.
+	- First of all, just for reference, let's name the address where the list of numbers starts as `data_items`.
+	- Let's say that the last number in the list will be a zero, so we know where to stop.
+	- We also need:
+		- a value to hold the current position in the list
+		- a value to hold the current list element being examined
+		- the current highest value on the list
+- Let's assign each of these a register:
+	- `%edi` will hold the current position in the list.
+	- `%ebx` will hold the current highest value in the list.
+	- `%eax` will hold the current element being examined.
+- When we begin the program and look at the first item in the list, since we haven't seen any other items, that item will automatically be the current largest element in the list. 
+- Also, we will set the current position in the list to be zero; the first element. From then, we will execute the following steps:
+	1. Check the current list element (`%eax`) to see if it's zero (the terminating element/sentinel value).
+	2. If it is zero, exit
+	3. Increase the current position (`%edi`)
+	4. Load the next value in the list into the current value register (`%eax`).
+		- What addressing mode might we use here? Why?
+			- Register-addressing mode: containing a register to access and retrieve data from rather than a memory location.
+			- Because we are loading the next value in the list, a list and its values which we have registered into a register, and so must be accessed using register-addressing mode.
+	5. Compare the current value (`%eax`) with the current highest value (`%ebx`)
+	6. If the current value is greater than the current highest value, replace the current highest value with the current value
+	7. Repeat.
+- These "if"s are a class of instructions called *flow control* instructions because they tell the computer which steps to follow and which paths to take. 
+	- In the previous program, we did not have any flow control instructions, as there was only one possible path to take: `exit`.
+	- This program is much more dynamic in that it is directed by data.
+- Depending on what data this program receives, it will follow different instruction paths. This will be accomplished by two different instructions:
+	- The conditional jump changes paths based on the results of a previous comparison or calculation.
+	- The unconditional jump just goes directly to a different path no matter what.
+- Another use of flow control is in implementing loops, which are pieces of program code that are repeated.
+	- The first part of the program was only done once, so it wasn't a loop.	- However, the next part is repeated over and over again for every number in the list, terminating only when the sentinel value is encountered.
+- Loops are implemented by doing unconditional jumps to the beginning of the loop at the end of the loop, which causes it to start over.
+- Remember to always have a conditional jump to exit the loop somewhere or the loop will continue forever!
+	- This condition is caled an *infinite loop*.
+- In the next section, we will implement this program that we have planned. Program planning sounds complicated, and it is to some degree.
+	- When you first start programming, it's often hard to convert our normal thought process into a procedure that the computer can understand.
+	- We often forget the number of "temporary storage locations" that our minds are using to process problems.
+- As you read and write programs, however, this will eventually become very natural to you. Just have patience.
+
+## Finding a Maximum Value
+- Initialize `maximum.s` with the code prepared in the book.
+- 
+
+## Addressing Modes
+
+## Review
+
+### Know the Concepts
+
+### Use the Concepts
+
+### Going Further
