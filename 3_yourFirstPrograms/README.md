@@ -40,3 +40,69 @@
 - The programmer determins what each number means.
 
 ## Outline of an Assembly Language Program
+- At the beginning there are lots of liens that begin with hashes `#`. These are *comments*.
+- Get into the habit of writing commetns in your code that will help them understand both why the program exists and how it works. Always include the following in your commetns:
+	- The purpose of the code
+	- An overview of the processing involved
+	- Anything strange your program does and why it does it
+- You'll find that many programs end up doing strange things. Usually there is a reason for that, but unfortunately, programmers never documetn such things in their comments. So, future programmers either have to learn the reason by modifying and watching the code break, or just leaving it alone whether it is still needed or not. You should *always* documetn any strange behavior your program performs. Unfortuantely, figuring out what is strange and what is straightforward comes mostly with experience.
+- After the comments, the next line says
+	- `.section .data`
+	- Anything starting with a period isn't directly translated into a machine instruction. Instead, it's an instruction to the assembler itself.
+- These are called *assembler directives* or *pseudo-operations* because they are handled by the assembler and are not actually run by the computer
+	- The `.section` command breaks your program into sections.
+	- This command starts the data section, where you list any memory storage you will need for data.
+		- `.section .data`
+	- Our program doesn't use any, so we don't need the section. It's just here for compeleteness. Almost every program you write in the future will have data.
+- Right after this you have
+	- `.section .text`
+	- which starts the text section. The text section of a program is where the program instructions live.
+- The next instruction is
+	- `.globl _start`
+	- This instructs the assembler that `_start` is important to remember.
+	- `_start` is a *symbol*, which means that it is going to be replaced by something else either during assembly or linking.
+	- `.globl` means that the assembler shouldn't discard this symbol after assembly because the linker will need it.
+	- `_start` is a special symbol that always needs to be marked with `.globl` because it marks the location of the start of the program.
+	- *Without markign this location in this way, when the computer loads your program it won't know where to begin running your program.*
+- Symbols are generally used to mark locations of programs or data, so you can refer to them by name instead of by their location number.
+- Symbols are used so that the assembler and linker can take care of keeping track of addresses, and you can concentrate on writing your program.
+- The next line
+	- `_start:`
+	- *defines* the value of the *_start* label. A *label* is a symbol followed by a colon. 
+Labels define a symbol's value. They tell the assembler to make the symbol's value be wherever the next instruction or data element will be. This way, if the actual physical location of the data or instruction changes, you don't have to rewrite any references to it: the symbol automatically gets the new value.
+- Now we get into actual computer instructions. The first such instruction is this:
+	- `movl $1, %eax`
+	- This instruction transfers the number `1` into the `%eax` register.
+- In assembly language, many instructions have *operands*. 
+	- `movl` has two operands: the *source* and the *destination*.
+	- Operands can be numbers, memory location references, or registers.
+	- See Appendix B for more information on which instructions take which kinds of operands.
+- On x86 processors, there are several general-purpose registers (all of which can be used with `movl`):
+	- `%eax`
+	- `%ebx`
+	- `%ecx`
+	- `%edx`
+	- `%edi`
+	- `%esi`
+- In addition to these general-purpose registers, there are also several special-purpose registers, including:
+	- `%ebp`
+	- `%esp`
+	- `%eip`
+	- `%eflags`
+- Note that on x86 processors, even the general-purpose registers have some special purposes, or used to before it went 32-bit. 
+	- However, these are general-purpose registers for most instructions. Each of them has at least one instruction where it is used in a special way. 
+	- However, for most of them, those instructions aren't covered in this book.
+- You may be wondering, *why do all of these registers begin with the letter e?* The reason is that early generations of x86 processors were 16 bits rather than 32 bits. 
+	- Therefore, the registers were only half the length they are now. In later generations of x86 processors, the size of the registers doubled. They kept the old names to refer to the first half of the register and added an `e` to refer to the extended versions of the register. 
+	- Usually you will only use the extended versions. Newer models also offer a 64-bit mode, which doubles the size of these registers yet again and uses an `r` prefix to indicate the larger registers (i.e. `%rax` is the 64-bit version of `%eax`). 
+	- However, these processors are not widely used (2004), and are not covered in this book.
+- So, the `movl` instructions moves the number `1` into `%eax`. The dollar-sign in front of the `1` indicates that we want to use immediate mode addressing. Without the dollar-sign, it would do direct addressing, loading whatever number is at address 1.
+- The reason we are moving the number 1 into `%eax` is because we are preparing to call the Linux Kernel. The number `1` is the number of the `exit` *system call*.
+	- Many operations such as calling other programs, dealing with files, and exiting have to be handled by the operating system through system calls.
+	- When you make a system call, the system call number has to be loaded into `%eax` (for a complete listing of system calls and their numbers, see Appendix C).
+- *Parameters* are extra data stored in other registers. 
+	- In the case of the `exit` system call, the operating system requires a status code to be loaded in `%ebx`. This value is then returned to the system, and it is the value you retrieved when you typed `echo $?`.
+	- So, we load `%ebx` with `0` by typing the following:
+		- `movl $0, %ebx`
+
+
