@@ -186,7 +186,31 @@ Labels define a symbol's value. They tell the assembler to make the symbol's val
 	  data_items:	# These are the data items
 			.long 3,67,34,222,45,75,54,34,44,33,22,11,66,0 
 	  ```
-
+	- `.data_items` is a label that refers to the location that follows it.
+	- Then, there is a directive that starts with `.long`, which causes the assembler to reserve memory for the list of numberes that follow it.
+	- Because `data_items` is a label, any time in our program where we need to refer to this address we can use the `data_items` symbol, and the assembler will substitute it with the address where the numbers start during assembly.
+- There are several different types of memory locations other than `.long` that can be reserved. The main ones are as follows:
+	- `.byte`
+		- Bytes take up one storage location for each number. They are limited to numbers between 0 and 255.
+	- `.int`
+		- Integers take up two storage locations for each number. These are limited to numbers between 0 and 65535.
+	- `.long`
+		- Longs take up four storage locations. This is the same amount of space the registers use, which is why they are used in this program. They can hold numbers between 0 and 4294967295.
+	- `.ascii`
+		- The `.ascii` directive is to enter in characters into memory. Characters each take up one storage location (they are converted into bytes internally). 
+		- So, if you gave the directive. `.ascii "Hello there\0"`, the assembler would reserve 12 storage locations (byte). 
+			- The first byte contains the numeric code for `H`, the second byte contains the numeric code for `e`, and so forth.
+			- The last character is represented by `\0`, and it is the terminating character (it will never display, it just tells other parts of the program that it's the end of the characters).
+		- Letters and numbers that start with a backslash represent characters that are not typeable on the keyboard or easily viewable on the screen. 
+			- For example, `\n` refers to the "newline" character which causes the computer to start output on the next line.
+			- `\t` refers to the "tab" character.
+		- All of the letters in an `.ascii` directive should be in quotes.
+- In our example, the assember reserves 14 `.long`'s one right after another. Since each long takes up 4 bytes, that means that the whole list takes up 56 bytes.
+	- `.data_items` is used by the assembler to refer to the address of the first of these values.
+- Take note that the last data item in the list is a zero. I decided to use a zero to tell my program that it has hit the end of the list.
+	- No matter how I do it, I must have some method of determining the end of the ist. The computer knows nothing: it can only do what it is told.
+	- It's not going to stop processing unless I give it some sort of signal.
+	- Otherwise, it would continue processing past the end of the list into the data that follows it, and even to locations where we haven't put any data.
 ## Addressing Modes
 
 ## Review
@@ -196,3 +220,4 @@ Labels define a symbol's value. They tell the assembler to make the symbol's val
 ### Use the Concepts
 
 ### Going Further
+
