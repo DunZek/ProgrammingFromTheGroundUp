@@ -129,7 +129,9 @@ into the register.
 
 ### Going Further
 - What are the minimum number of addressing modes needed for computation?
+	- One, direct-addressing mode.
 - Why include addressing modes that aren't strictly needed?
-	- Firstly, to
-- Research and then describe how pipelineing (or one of the other complicating factors) affects the fetch-execute cycle.
+	- Optimization.
+	- Ease.
+- Research and then describe how pipelining (or one of the other complicating factors) affects the fetch-execute cycle.
 - Research and then describe the tradeoffs between fixed-length instructions and variable-length instructions.
