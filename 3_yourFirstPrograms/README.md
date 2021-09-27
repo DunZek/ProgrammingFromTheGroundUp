@@ -289,6 +289,12 @@ Labels define a symbol's value. They tell the assembler to make the symbol's val
 - The exit call requires that we put our exit status in `%ebx`.
 
 ## Addressing Modes
+- In the Section called *Data Accessing Methods* in Chapter 2, we learned the different types of addressing modes available for use in assembly language.
+- This seciont will deal with how those addressing modes are represented in assembly language instructions.
+- The general form of memory address references is this:
+	- `ADDRESS_OR_OFFSET(%BASE_OR_OFFSET,%INDEX,MULTIPLIER)`
+- All of the fields are optional. To calculate the address, simply perform the following calculation:
+	- `FINAL ADDRESS = ADDRESS_OR_OFFSET + %BASE_OR_OFFSET + MULTIPLIER * INDEX`
 
 ## Review
 
