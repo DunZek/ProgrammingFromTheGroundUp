@@ -5,7 +5,8 @@
 #VARIABLES:	The registers have the following uses:
 #
 # %edi - Holds the index of the data item being examined
-# %ebx - Largest data item found
+# %ebx - Largest data item found. Maximum exit status = 255
+# 								  otherwise.
 # %eax - Current data item
 #
 # The following memory locations are used:

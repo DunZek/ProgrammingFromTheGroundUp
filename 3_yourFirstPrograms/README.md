@@ -211,6 +211,83 @@ Labels define a symbol's value. They tell the assembler to make the symbol's val
 	- No matter how I do it, I must have some method of determining the end of the ist. The computer knows nothing: it can only do what it is told.
 	- It's not going to stop processing unless I give it some sort of signal.
 	- Otherwise, it would continue processing past the end of the list into the data that follows it, and even to locations where we haven't put any data.
+- Notice that we don't have a `.global` declaration for `data_items`. This is because we only refer to these locations within the program.
+	- No other file or program needs to know where they are located.
+	- This is in contrast to the _start symbol, which Linux needs to know where it is so that it knows where to begin the program's execution.
+- In the comments you will notice that we've marked some *variables* that we plan to use. A variable is a dedicated storage location used for a specific purpose, usually given a distinct name by the programmer. In this program, we have several variables:
+	- a variable for the current maximum number found
+	- a variable for which number of the list we are currently examining, called the *index*
+	- a variable holding the current number being examined
+- In this case, we have few enough variables that we can hold them all in registers. In larger programs, you have to put them in memory, and then move them to registers when you are ready to use them.
+	- In this program, we are using `%ebx` as the location of the largest item we've found.
+	- `%edi` is used as the *index* to the current data item we're looking at.
+- Now, let's talk about what an index. The data item number is the *index* of `data_items`. You'll notice that the first instruction we give to the computer is:
+	- `movl $0, %edi`
+- Now, the next instruction is tricky, but crucial to what we're doing. It says:
+	- `movl data_items(,%edi,4), %eax`
+	- Now to understand this line, you need to keep several things in mind:
+		- `data_items` is the location number of the start of our number list.
+		- Each number is stored across 4 storage locations (because we declared it using `.long`)
+		- `%edi` is holding 0 at this point
+	- So, basically what this line says is:
+		1. start at the beginning of `data_items`
+		2. take the first item number (because `%edi` is 0)
+		3. remember that each number takes up four storage locations
+	- Then it stores that number in `%eax`
+- This is how you write indexed addressing mode instructions in assembly language. The instruction in a general form is this:
+	`movl BEGINNINGADDRESS(,%INDEXREGISTER,WORDSIZE)`
+	- In our case:
+		- `data_items` was our beginning address
+		- `%edi` was our index register
+		- 4 was our word size
+	- This topic is discussed further in the Section called *Addressing Modes*.
+	- Very strange things would happen if we used a number other than 4 as the size of our storage locations.
+		- It's actually what's called a *multiplier*. Basically, the way it works is that you start at the location specified by `data_items`, then you add `%edi` * 4 storage locations, and retrieve the number there.
+		- Usually, you use the size of the numbers as your multiplier, but in some circumstances you'll want to do other things.
+- Let's look at the next line:
+	- `movl %eax, %ebx`
+	- We have the first item stored in `%eax`. As the first item, it's the biggest so far.
+	- We store it in `%ebx`, since that's where we are keeping the largest number we found.
+	- Also, even though `movl` stands for *move*, it actualyl copies the values, so `%eax` and `5ebx` both contain the starting value.
+		- The `l` in `movl` stands for `move long` since we are moving a value that takes up four storage locations.
+- We have marked the starting location of the loop in the symbol `start_loop`. We have a single section of code (a loop) that we execute over and over again for every element in `data_items`.
+- Then we have these instructions:
+	- ```assembly
+	  cmpl $9, %eax
+	  je end_loop		
+	  ```
+	- The `cmpl` instruction compares the two values. This compare instruction affects a register not mentioned here, the `%eflags` register, also known as the status register.
+	- The next line is a flow control instruction which says to *jump* to the `end_loop` location if the values that were just compared to are equal (that's what the `e` of `je` means).
+		- It uses the status register to hold the value of the last comparison.
+- We used `je`, but there are many jump statements that you can use:
+	- `je` - Jump if the values were equal
+	- `jg` - Jump if the second value was greater than the first value
+	- `jge` - Jump if the second value was greater than or equal to the first value
+	- `jl` - Jump if the second value was less than the first value
+	- `jle` Jump if the second value was less than or equal to the first value
+	- `jmp` - Jump no matter what. This does not need to be preceeded by a comparison.
+	- The complete list is documented in Appendix B.
+- The names of these symbols can be anything you want them to be, as long as they only contain letters and the underscore character (_).
+	- The only one that is forced is _start, and possibly others that you declare with `.global`.
+- If the last loaded element was not zero, we go on to the next instructions:
+	- ```assembly
+	  incl %edi
+	  movl data_items(,%edi,4), %eax
+	  ```
+	- `incl` increments the value of `%edi` by one.
+	- Then the `movl` is just like the one we did beforehand.
+- Now `%eax` has the next value to be tested. So, let's test!
+	- ```assembly
+	  cmpl %ebx, %eax
+	  jle start_loop
+	  ```
+- Otherwise, we need to record that value as the largest one:
+	- ```assembly
+	  movl %eax, %ebx
+	  jmp start_loop
+	  ```
+- The exit call requires that we put our exit status in `%ebx`.
+
 ## Addressing Modes
 
 ## Review
