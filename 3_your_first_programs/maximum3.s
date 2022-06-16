@@ -21,10 +21,14 @@ _start:
 	movl data_items(,%edi,4), %eax	
 	movl %eax, %ebx					
 
-start_loop:			
-	# 				
-	cmpl $0, %eax
+start_loop:
+	movl $data_items, %ebx
+	jmp loop_exit
+
+	# Terminate loop after the given list's ending address is reached.
+	cmpl $0, %edi
 	je loop_exit
+
 	incl %edi						
 	movl data_items(,%edi,4), %eax
 	cmpl %ebx, %eax					
@@ -33,6 +37,5 @@ start_loop:
 	jmp start_loop					
 
 loop_exit:
-	movl data_items 
 	movl $1, %eax	
 	int $0x80

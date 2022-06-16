@@ -51,12 +51,13 @@ As you go through this chapter, you may want to refer to Appendix B and Appendix
 - Modify the maximum program to use the number 255 to end the list rather than the number 0.
     - [Modified program](./maximum2.s)
 - Modify the maximum program to use an ending address rather than the number 0 to know when to stop.
-    - What?
+    - [Modified program](./maximum3.s)
 - Modify the maximum program to use a length count rather than the number 0 to know when to stop.
     - [Modified program](./maximum4.s)
 - What would the instruction `movl _start, %eax` do? Be specific, based on your knowledge of both addressing modes and the meaning of `_start`. How would this differ from the instruction `movl $_start, %eax`?
-    - `movl _start, %eax`
-    - `movl $_start, %eax`
+    - `movl _start, %eax` moves the value of what the byte address of `_start` points to to `%eax`.
+    - `movl $_start, %eax` moves the value of the byte address of `_start` into `%eax`.
+    
 
 ### Going Further
 - Modify the first program to leave off the `int` instruction line. Assemble, link, and execute the new program. What error message do you get. Why do you think this might be?
