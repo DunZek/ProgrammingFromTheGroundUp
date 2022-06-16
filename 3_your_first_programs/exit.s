@@ -1,11 +1,11 @@
-#PURPOSE:	Simple program that exists and returns a
+# PURPOSE:	Simple program that exists and returns a
 #			status code back to the Linux kernel
 #
 
-#INPUT:		none
+# INPUT:		none
 #
 
-#OUTPUT:	returns a status code. This can be viewed 
+# OUTPUT:	returns a status code. This can be viewed 
 #			by typing
 #			
 #			echo $?
@@ -13,7 +13,7 @@
 #			after running the program
 #
 
-#VARIABLES:
+# VARIABLES:
 #			%eax holds the system call number
 #			%ebx holds the return status
 #
@@ -34,7 +34,7 @@ _start:
 	int $0x80		# this wakes up the kernel to run
 					# the exit command
 
-#STRANGE THINGS:
+# STRANGE THINGS:
 #			A segmentation fault error occurs on WSL1.
 #			The image must be updated to WSL2. 
 #			

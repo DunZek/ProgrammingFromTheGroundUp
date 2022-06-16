@@ -172,10 +172,25 @@ into the register.
 	- You would be trying to access 20 * 1 + 9123478 = memory-location 9123487. 
 
 ### Going Further
-- What are the minimum number of addressing modes needed for computation?
-	- One, direct-addressing mode.
-- Why include addressing modes that aren't strictly needed?
-	- Optimization.
-	- Ease.
-- Research and then describe how pipelining (or one of the other complicating factors) affects the fetch-execute cycle.
-- Research and then describe the tradeoffs between fixed-length instructions and variable-length instructions.
+#### What are the minimum number of addressing modes needed for computation?
+- One, direct-addressing mode.
+
+#### Why include addressing modes that aren't strictly needed?
+- Optimization.
+- Ease.
+
+#### Research and then describe how pipelining (or one of the other complicating factors) affects the fetch-execute cycle.
+- Un-pipelined instruction cycles performs sequentially and finishes instructions one after another.
+- Meanwhile, pipelining allows instruction cycles to perform concurrently or even in parallel: decoding, execution, and fetching of an instruction can occur all at once.
+
+#### Research and then describe the tradeoffs between fixed-length instructions and variable-length instructions.
+- Using fixed-length instructions means representing every instruction using the same number of bytes (ex: ARM and SPARC uses 4).
+	- This however means that each individual instruction is limited to a certain complexity.
+	- Furthermore, compound operations take a lot more instructions to be encoded into.
+	- So, computers employing such kinds of fixed-length instructions are called a *Reduced Instruction Set Computer (RISC)* because the complexity of its instruction set is reduced.
+- Using fixed-length instructions means representing different instructions using different number of bytes; there is no constraint in how many bytes can be used to encode an instruction (ex: Intel CPUs, M68000 processors).
+	- This means that simpler operations can be encoded with fewer bytes.
+	- Furthermore, more complex operations can be encoded within a single instruction.
+	- Thus, a computer employing such instructions are called a *Complex Instruction Set Computer (CISC)*.
+
+Nevertheless, the power of a computer is dictated by how many things it can do at once. CISC and RISC computers have their own sets of advantages and disadvantages that enable the underlying circuitry to achieve multitasking.
