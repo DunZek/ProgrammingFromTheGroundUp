@@ -61,5 +61,10 @@ As you go through this chapter, you may want to refer to Appendix B and Appendix
 
 ### Going Further
 - Modify the first program to leave off the `int` instruction line. Assemble, link, and execute the new program. What error message do you get. Why do you think this might be?
-    - 
+    - Segmentation fault (core dumped)
+    - The program continues to run inadvertently, trespassing memory locations.
 - So far, we have discussed three approaches to finding the end of the list - using a special number, using the ending address, and using the length count. Which approach do you think is best? Why? Which approach would you use if you knew that the list was sorted? Why?
+    - Using a sentinel value is best.
+    - It is very simple and flexible, causing the least problems.
+    - Not sure.
+    - Not sure.
