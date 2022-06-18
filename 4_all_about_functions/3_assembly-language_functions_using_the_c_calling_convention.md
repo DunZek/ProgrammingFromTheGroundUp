@@ -81,17 +81,25 @@ When a function is done executing:
 2. It resets the stack to before it was called (pops the current stack frame off, revealing that of the calling code).
 3. It returns control back to wherever it was called from using the `ret` instruction, which pops a value from the stack and sets the instruction pointer `%eip` to that value.
 
-...
-
+The previous stack frame must be restored. But, the return address isn't at the top of the current one (the local variables are). So, we have to reset the stack pointer `%esp` and base pointer `%ebp` to their values before the current function was even called:
 ```assembly
 movl %ebp, %esp
 popl $ebp
 ret
 ```
 
-At this point, consider all local variables to be disposed of.
+At this point, consider all local variables to be disposed of because future stack pushes will overwrite them. Local variables shouldn't surpass the lifetime of its function's stack frame.
 
+Furthermore at this point, control has been handed back to the calling code, which can now examine `%eax` for the return value. However, all the parameters that was pushed onto the stack must be popped off to get the stack pointer back where it was. Alternatively, simply change the value of `%esp` using `addl` if the values of the parameter aren't needed anymore.
 
 ## Destruction of Registers
+Expect only `%ebp` to keep its value since when before a function is called. Every other register will most likely be wiped out and used by the function. Otherwise, save the values of those registers by pushing them on the stack before pushing the function's parameter. 
+
+Check to make sure the calling conventions of your target language are compatible before you interoperate with them.
 
 ### Extended Specification
+Details of the C language calling convention (also known as the *ABI*, or *Application Binary Interface*) is available online. 
+
+We have oversimplified and left out several important pieces to make this simpler for new programmers. 
+
+For full details, you should check out the documents available at <http://www.linuxbase.org/spec/refspecs/>. Specifically, you should look for the *System V Application Binary Interface - Intel386 Architecture Processor Supplement*.
