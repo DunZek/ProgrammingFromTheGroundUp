@@ -70,7 +70,7 @@ _start:
 #           %rax is temporary storage.
 .type power, @function
 power:
-    # Preserve current frame pointer ():
+    # Preserve current frame pointer:
     push %rbp
 
     # Create new frame pointer pointing to current stack top and use it for later:
@@ -117,5 +117,5 @@ end_power:
     # Restore the previous frame's pointer 
     pop %rbp
 
-    # 
+    # Return control back to caller:
     ret

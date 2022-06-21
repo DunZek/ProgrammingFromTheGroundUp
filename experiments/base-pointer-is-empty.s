@@ -12,13 +12,13 @@ Run this program a sufficient number of times to demonstrate.
 .globl _start
 _start:
     # Push some values to the stack:
-    push $10
-    push $20
-    push $30
-
-    # Print the address:
-    mov %rbp, %rbx
+    call my_func
 
     # Exit properly, interrupt and perform call:
     mov $1, %rax
     int $0x80
+
+.type my_func, @function
+my_func:
+    mov %rsp, %rbx
+    ret
