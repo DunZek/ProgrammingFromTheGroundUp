@@ -11,7 +11,7 @@
 
 .section .text
 .globl _start
-.globl factorial    # needed to share this function to other programs
+.globl factorial    # to share this function with other programs
 
 _start:
     # Call 'factorial' function to do 4!:
@@ -27,8 +27,33 @@ _start:
     int $0x80
 
 
+# A recursive function that calculates the factorial of a given number.
+# %rax holds 
 .type factorial, @function
 factorial:
+    # Preserve previous frame pointer and use current one:
+    push %rbp
+    mov %rsp, %rbp
+
+    # Assign parameter to high-speed register:
+    mov 16(%rsp), %rax  # (1) number
+
+    # Exit condition (factorial exhausted):
+    cmp $1, %rax
+    je factorial_end
+
+    # Consume a factorial:
+    dec %rax
+
+    # Call 'factorial' function to do %rax!:
+    push %rax
+    call factorial
+
+    # 
+    mov 16(%rbp), %rbx
+
+    #
+    imul %rbx, %rax
 
 factorial_end:
     mov %rbp, %rsp

@@ -31,8 +31,8 @@ power:
     mov %rsp, %rbp
 
     # Assign parameters to high-speed registers:
-    mov 16(%rbp), %rbx
-    mov 24(%rbp), %rcx
+    mov 16(%rbp), %rbx  # 8(%rbp) is the return address pushed
+    mov 24(%rbp), %rcx  # by 'call power' in the caller routine.
 
     # Store initial result:
     mov $1, %rax
