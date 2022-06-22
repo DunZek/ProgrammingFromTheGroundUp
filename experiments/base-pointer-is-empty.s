@@ -1,7 +1,7 @@
 /* 
 The base pointer register is a free pointer designed to work as a free stack register.
 
-Which, is unlike the stack pointer register, which is continuously occupied by an ever changing address to the top of the stack.
+Which, is unlike the stack pointer register, is continuously occupied by an ever changing address to the top of the stack.
 
 Run this program a sufficient number of times to demonstrate.
 */
@@ -11,8 +11,10 @@ Run this program a sufficient number of times to demonstrate.
 .section .text
 .globl _start
 _start:
+
     # Push some values to the stack:
     call my_func
+
 
     # Exit properly, interrupt and perform call:
     mov $1, %rax
@@ -20,5 +22,6 @@ _start:
 
 .type my_func, @function
 my_func:
-    mov %rsp, %rbx
+    mov %rbp, %rbx
+
     ret

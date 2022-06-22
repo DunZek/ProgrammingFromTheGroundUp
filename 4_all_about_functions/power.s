@@ -80,8 +80,8 @@ power:
     sub $8, %rsp
 
     # Access the first and second arguments respectively:
-    mov 8(%rbp), %rbx
-    mov 16(%rbp), %rcx
+    mov 8(%rbp), %rbx   # base number
+    mov 16(%rbp), %rcx  # power
 
     # Store current result temporarily for later:
     mov %rbx, -8(%rbp)
@@ -92,16 +92,16 @@ power_loop_start:
     cmp $1, %rcx
     je end_power
 
-    # Move current result into %eax:
+    # 1. Move current result into %rax:
     mov -8(%rbp), %rax
 
-    # Multiply current result by the base number:
+    # 2. Multiply current result by the base number:
     imul %rbx, %rax
 
-    # Store the current result:
+    # 3. Store the current result:
     mov %rax, -8(%rbp)
 
-    # Decrement the power:
+    # 4. Decrement the power:
     dec %rcx
 
     # Repeat calculations from the top:

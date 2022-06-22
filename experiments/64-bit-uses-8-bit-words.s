@@ -14,8 +14,12 @@ _start:
     push $20
     push $30
 
-    # Print '20', which is 8 bytes away from '30':
-    mov 8(%rsp), %rbx
+    # These shouldn't be weird:
+    push %rbp 
+    mov %rsp, %rbp
+
+    # (Deprecated) Print '20', which is 8 bytes away from '30':
+    mov 8(%rbp), %rbx
 
     # Exit properly, interrupt and perform call:
     mov $1, %rax
