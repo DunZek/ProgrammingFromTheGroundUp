@@ -32,7 +32,7 @@ _start:
     # 3. Reset the stack pointer back to where it was:
     add $16, %rsp
 
-    # 4. Save the first answer before calling the next function:
+    # Save the first answer before calling the next function:
     push %rax 
 
     # 1. Push second and first argument to the stack respectively:
@@ -45,7 +45,7 @@ _start:
     # 3. Reset the stack pointer back to where it was:
     add $16, %rsp
 
-    # 4. Retrieve the first answer we saved before performing the addition:
+    # Retrieve the first answer we saved before performing the addition:
     pop %rbx
 
     # Perform 2^3 + 5^2 and store:
@@ -80,8 +80,8 @@ power:
     sub $8, %rsp
 
     # Access the first and second arguments respectively:
-    mov 8(%rbp), %rbx   # base number
-    mov 16(%rbp), %rcx  # power
+    mov 24(%rbp), %rbx   # base number
+    mov 32(%rbp), %rcx  # power
 
     # Store current result temporarily for later:
     mov %rbx, -8(%rbp)
