@@ -14,8 +14,20 @@
 .globl factorial    # needed to share this function to other programs
 
 _start:
+    # Call 'factorial' function to do 4!:
+    push $4         # (1) number
+    call factorial  # transfer execution
+    add $8, %rsp    # reset stack pointer
+
+    # Print result as the status code:
+    mov %rax, %rbx
+
+    # Exit properly:
+    mov $1, %eax
+    int $0x80
 
 
+.type factorial, @function
 factorial:
 
 factorial_end:
