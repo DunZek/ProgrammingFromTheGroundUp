@@ -44,16 +44,22 @@ power:
                     # (2) product/result
 
     # Assign arguments to local variables:
-    mov 24(%rbp), -8()
-    mov 16(%rbp), 
+    mov 24(%rbp), -8(%rbp)  # power
+    mov 16(%rbp), -16(%rbp) # result
 
 power_loop:
     # Exit condition (powering number exhausted):
-    cmp $1, (%rbp)
+    cmp $1, -8(%rbp)
 
+    # Consume a power:
+    imul 16(%rbp), -16(%rbp)    # multiply to result
+    dec -8(%rbp)                # reciprocate
+
+    # Repeat:
+    jmp power_loop
 
 end_power:
     # Exit function properly:
-    pop %rbp        #
-    mov %rbp, %rsp  #
-    ret             # transfer execution to caller
+    mov %rbp, %rsp  # restore stack pointer
+    pop %rbp        # restore previous frame pointer
+    ret             # transfer execution to caller using return address
