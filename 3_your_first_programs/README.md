@@ -41,7 +41,19 @@ As you go through this chapter, you may want to refer to Appendix B and Appendix
 - What things do you have to plan for when writing a program?
     - Everything, what inputs are used, what output is to be produced, ALL the procedures that take data of wherever origin to produce the output, what exactly that data is, etc.
 - Go through every instruction and list what addressing mode is being used for each operand.
-    - What?
+    29. `movl IMMEDIATE, REGISTER`
+    30. `movl INDEXED, REGISTER`
+    31. `movl REGISTER, REGISTER`
+    35. `cmpl IMMEDIATE, REGISTER`
+    36. `je DIRECT`
+    39. `incl REGISTER`
+    40. `movl INDEXED, REGISTER`
+    43. `cmpl REGISTER, REGISTER`
+    44. `jle DIRECT`
+    47. `novl REGISTER, REGISTER`
+    48. `jmp DIRECT`
+    52. `movl IMMEDIATE, REGISTER`
+    53. `int IMMEDIATE`
 
 ### Use the Concepts
 - Modify the first program to return the value 3.

@@ -37,8 +37,22 @@
 
 ### Going Further
 - Do you think it’s better for a system to have a large set of primitives or a small one, assuming that the larger set can be written in terms of the smaller one?
+    - What is this question asking?
 - The factorial function can be written non-recursively. Do so.
-- Find an application on the computer you use regularly. Try to locate a specific feature, and practice breaking that feature out into functions. Define the function interfaces between that feature and the rest of the program.
-- Come up with your own calling convention. Rewrite the programs in this chapter using it. An example of a different calling convention would be to pass paramters in registers rather than the stack, to pass them in a different order, to return values in other registers or memory locations. Whatever you pick, be consistent and apply it throughout the whole program.
+    - [./factorial2.s](./factorial2.s)
+- (1) Find an application on the computer you use regularly. (2) Try to locate a specific feature, and practice breaking that feature out into functions. (3) Define the function interfaces between that feature and the rest of the program.
+    1. Elden Ring.
+    2. 
+    3. 
+- Come up with your own calling convention. Rewrite the programs in this chapter using it. An example of a different calling convention would be to (1) pass parameters in registers rather than the stack, (2) to pass them in a different order, (3) to return values in other registers or memory locations. Whatever you pick, be consistent and apply it throughout the whole program.
+    - [./power2.s](./power2.s)
+    - [./factorial3.s](./factorial3.s)
+    - 
 - Can you build a calling convention without using the stack? What limitations might it have?
+    - The stack provides a very large segment of memory that where values can be stored and processed in.
+    - A function calling convention using only registers would be extremely limiting, and particular to the use of only one function call. This is not worth the use.
+    - A function calling convention using any other part of memory would be burdensome due to (1) maintaining logic that describes the structure of use and (2) to formulate the standard of such logic. Furthermore, due to this amounting complexity, it would be dangerous for use as many mistakes can be made.
 - What test cases should we use in our example program to check to see if it is working properly?
+    - Which example program? There's two example programs (power.s & factorial.s).
+    - Regarding functions in general? What part of functions?
+    - In general, functions should be tested over multiple inputs, and especially known edge cases.
