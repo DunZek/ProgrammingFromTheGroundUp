@@ -33,7 +33,7 @@
 - Write a program that calls maximum with 3 different lists, and returns the result of the last one as the program’s exit status code.
     - [./maxima.s](./maxima.s)
 - Explain the problems that would arise without a standard calling convention.
-    - Without a standard calling convention, there is no telling how various different and perhaps specialized programs can interface with each other and perform aggregate work/provide a service as an application.
+    - Without a standard calling convention, there is no telling how various different and perhaps specialized programs can interface with each other and perform to aggregate work/provide a service as an application.
 
 ### Going Further
 - Do you think it’s better for a system to have a large set of primitives or a small one, assuming that the larger set can be written in terms of the smaller one?
