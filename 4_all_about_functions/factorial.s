@@ -36,7 +36,7 @@ factorial:
     mov %rsp, %rbp
 
     # Assign parameter to high-speed register:
-    mov 16(%rsp), %rax  # (1) number
+    mov 16(%rsp), %rax  # (1) the number to get the factorial of
 
     # Exit condition (factorial exhausted):
     cmp $1, %rax
@@ -49,13 +49,15 @@ factorial:
     push %rax
     call factorial
 
-    # 
-    mov 16(%rbp), %rbx
-
-    #
-    imul %rbx, %rax
+    # Multiply the parameter to %rax, holding the final end result:
+    imul 16(%rbp), %rax
 
 factorial_end:
+    # Restore the stack pointer:
     mov %rbp, %rsp
+
+    # Restore previous frame pointer:
     pop %rbp
+
+    # Return control back to caller:
     ret
