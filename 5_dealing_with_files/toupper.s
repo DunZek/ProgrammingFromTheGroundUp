@@ -171,8 +171,29 @@ to_upper_loop:
     # Get the current byte:
     movb (%rax,%edi,1), %cl
 
-    # Go t
+    # Go to the next byte unless it is between 'a' and 'z':
     cmpb $LOWERCASE_A, %cl
     jl next_byte
     cmpb $LOWERCASE_Z, %cl
     jg next_byte
+
+    # Otherwise, convert the byte to uppercase:
+    addb $UPPER_CONVERSION, %cl
+    movb %cl,(%eax,%edi,1)
+
+next_byte:
+    # Next byte:
+    inc %rdi
+
+    # Continue unless we've reached the end:
+    cmp %rdi, %rbx
+
+    jne to_upper_loop
+
+to_upper_end:
+    # No return value. Just leave:
+    mov %rbp, %rsp  # restore stack pointer
+    pop %rbp        # restore previous frame pointer
+    ret             # transfer execution to caller
+
+    
